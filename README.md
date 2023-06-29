@@ -1,25 +1,11 @@
-<div align="center">
+# asdf-scarb
 
-# asdf-scarb [![Build](https://github.com/software-mansion-labs/asdf-scarb/actions/workflows/build.yml/badge.svg)](https://github.com/software-mansion-labs/asdf-scarb/actions/workflows/build.yml) [![Lint](https://github.com/software-mansion-labs/asdf-scarb/actions/workflows/lint.yml/badge.svg)](https://github.com/software-mansion-labs/asdf-scarb/actions/workflows/lint.yml)
+[Scarb] plugin for the [asdf] version manager.
 
-[scarb](https://docs.swmansion.com/scarb) plugin for the [asdf version manager](https://asdf-vm.com).
+## Install
 
-</div>
-
-# Contents
-
-- [Dependencies](#dependencies)
-- [Install](#install)
-- [Contributing](#contributing)
-- [License](#license)
-
-# Dependencies
-
-- `bash`, `curl`, `tar`: generic POSIX utilities.
-
-# Install
-
-Plugin:
+This plugin needs `bash`, `curl`, `tar` and other generic POSIX utilities.
+Everything should be included by default on your system.
 
 ```shell
 asdf plugin add scarb
@@ -27,7 +13,7 @@ asdf plugin add scarb
 asdf plugin add scarb https://github.com/software-mansion-labs/asdf-scarb.git
 ```
 
-scarb:
+## Use
 
 ```shell
 # Show all installable versions
@@ -46,12 +32,6 @@ scarb --version
 Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to
 install & manage versions.
 
-# Contributing
+[asdf]: https://asdf-vm.com
 
-Contributions of any kind welcome! See the [contributing guide](contributing.md).
-
-[Thanks goes to these contributors](https://github.com/software-mansion-labs/asdf-scarb/graphs/contributors)!
-
-# License
-
-See [LICENSE](LICENSE) © [Software Mansion](https://github.com/software-mansion-labs/)
+[scarb]: https://docs.swmansion.com/scarb
