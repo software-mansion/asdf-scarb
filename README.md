@@ -14,7 +14,7 @@ asdf plugin add scarb
 or
 
 ```shell
-asdf plugin add scarb https://github.com/software-mansion-labs/asdf-scarb.git
+asdf plugin add scarb https://github.com/software-mansion/asdf-scarb.git
 ```
 
 ## Use
