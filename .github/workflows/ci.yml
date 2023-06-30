@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  merge_group:
+
+jobs:
+  test:
+    name: test ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: asdf-vm/actions/plugin-test@v2
+        with:
+          command: scarb --version
+
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: shellcheck bin/* lib/*
+
+  shfmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mfinelli/setup-shfmt@v2
+      - uses: actions/checkout@v3
+      - run: shfmt --diff .
