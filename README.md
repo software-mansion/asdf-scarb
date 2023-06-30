@@ -9,28 +9,41 @@ Everything should be included by default on your system.
 
 ```shell
 asdf plugin add scarb
-# or
+```
+
+or
+
+```shell
 asdf plugin add scarb https://github.com/software-mansion-labs/asdf-scarb.git
 ```
 
 ## Use
 
+Show all installable versions:
+
 ```shell
-# Show all installable versions
 asdf list-all scarb
+```
 
-# Install specific version
+Install specific version:
+
+```shell
 asdf install scarb latest
+```
 
-# Set a version globally (on your ~/.tool-versions file)
+Set a version globally (on your `~/.tool-versions` file):
+
+```shell
 asdf global scarb latest
+```
 
-# Now scarb commands are available
+Now scarb commands are available:
+
+```shell
 scarb --version
 ```
 
-Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to
-install & manage versions.
+Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to install & manage versions.
 
 [asdf]: https://asdf-vm.com
 
