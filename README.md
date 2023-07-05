@@ -25,10 +25,16 @@ Show all installable versions:
 asdf list-all scarb
 ```
 
-Install specific version:
+Install latest version:
 
 ```shell
 asdf install scarb latest
+```
+
+Install specific version:
+
+```shell
+asdf install scarb 0.5.0
 ```
 
 Set a version globally (in your `~/.tool-versions` file):
