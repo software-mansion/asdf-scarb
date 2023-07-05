@@ -31,7 +31,7 @@ Install specific version:
 asdf install scarb latest
 ```
 
-Set a version globally (on your `~/.tool-versions` file):
+Set a version globally (in your `~/.tool-versions` file):
 
 ```shell
 asdf global scarb latest
