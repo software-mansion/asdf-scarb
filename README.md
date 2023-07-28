@@ -8,6 +8,12 @@ This plugin needs `bash`, `curl`, `tar` and other generic POSIX utilities.
 Everything should be included by default on your system.
 
 ```shell
+asdf plugin add scarb
+```
+
+or
+
+```shell
 asdf plugin add scarb https://github.com/software-mansion/asdf-scarb.git
 ```
 
