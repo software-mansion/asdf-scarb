@@ -1,0 +1,2 @@
+starknet-mainnet 0.5
+starknet-testnet 0.6
