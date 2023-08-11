@@ -17,9 +17,33 @@ jobs:
           - macos-latest
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: asdf-vm/actions/plugin-test@v2
+      - name: "Fetch latest Scarb version from GitHub releases"
+        id: version
+        shell: pwsh
+        run: |
+          $location = (Invoke-WebRequest -Uri "https://github.com/software-mansion/scarb/releases/latest" -Method Head -MaximumRedirection 0 -SkipHttpErrorCheck -ErrorAction Ignore).Headers.Location
+          $latest_version = ($location -replace '^.*/v','')
+          echo "Latest Scarb version found is $latest_version"
+          echo "LATEST_VERSION=$latest_version" >> $env:GITHUB_OUTPUT
+
+      - name: "Check Scarb latest"
+        uses: asdf-vm/actions/plugin-test@v2
         with:
-          command: scarb --version
+          command: scarb --version | grep "scarb ${{ steps.version.outputs.LATEST_VERSION }}"
+
+      - name: "Check Scarb v0.5.2"
+        uses: asdf-vm/actions/plugin-test@v2
+        with:
+          skip_install: true
+          version: 0.5.2
+          command: scarb --version | grep "scarb 0.5.2"
+
+      - name: "Check Scarb nightly-2023-08-10"
+        uses: asdf-vm/actions/plugin-test@v2
+        with:
+          skip_install: true
+          version: nightly-2023-08-10
+          command: scarb --version | grep "scarb 0.6.0+nightly-2023-08-10"
 
   shellcheck:
     runs-on: ubuntu-latest
