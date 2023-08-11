@@ -3,6 +3,7 @@
 set -euo pipefail
 
 GH_REPO="https://github.com/software-mansion/scarb"
+GH_NIGHTLIES_REPO="https://github.com/software-mansion/scarb-nightlies"
 TOOL_NAME="scarb"
 TOOL_TEST="scarb --version"
 
@@ -42,8 +43,18 @@ download_release() {
 	get_architecture || fail "Could not determine system architecture."
 	local _arch="$RETVAL"
 
-	local _tarball="scarb-v${version}-${_arch}.tar.gz"
-	url="$GH_REPO/releases/download/v${version}/${_tarball}"
+	local repository tag
+
+	if grep -q "nightly" <<<"$version"; then
+		repository=$GH_NIGHTLIES_REPO
+		tag=$version
+	else
+		repository=$GH_REPO
+		tag="v$version"
+	fi
+
+	local _tarball="scarb-${tag}-${_arch}.tar.gz"
+	url="${repository}/releases/download/${tag}/${_tarball}"
 
 	echo "* Downloading $TOOL_NAME release $version..."
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
