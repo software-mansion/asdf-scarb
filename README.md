@@ -37,6 +37,12 @@ Install specific version:
 asdf install scarb 0.5.0
 ```
 
+Install specific nightly version:
+
+```shell
+asdf install scarb nightly-2023-08-10
+```
+
 Set a version globally (in your `~/.tool-versions` file):
 
 ```shell
