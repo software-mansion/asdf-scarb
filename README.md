@@ -37,6 +37,12 @@ Install specific version:
 asdf install scarb 0.5.0
 ```
 
+Install latest nightly version:
+
+```shell
+asdf install scarb latest:nightly
+```
+
 Install specific nightly version:
 
 ```shell
@@ -58,5 +64,4 @@ scarb --version
 Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to install & manage versions.
 
 [asdf]: https://asdf-vm.com
-
 [scarb]: https://docs.swmansion.com/scarb
