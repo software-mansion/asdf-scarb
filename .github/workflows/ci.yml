@@ -26,6 +26,11 @@ jobs:
           echo "Latest Scarb version found is $latest_version"
           echo "LATEST_VERSION=$latest_version" >> $env:GITHUB_OUTPUT
 
+          $location = (Invoke-WebRequest -Uri "https://github.com/software-mansion/scarb-nightlies/releases/latest" -Method Head -MaximumRedirection 0 -SkipHttpErrorCheck -ErrorAction Ignore).Headers.Location
+          $latest_version = ($location -replace '^.*/nightly-','nightly-')
+          echo "Latest Scarb nightly version found is $latest_version"
+          echo "LATEST_NIGHTLY_VERSION=$latest_version" >> $env:GITHUB_OUTPUT
+
       - name: "Check Scarb latest"
         uses: asdf-vm/actions/plugin-test@v2
         with:
@@ -37,6 +42,13 @@ jobs:
           skip_install: true
           version: 0.5.2
           command: scarb --version | grep "scarb 0.5.2"
+
+      - name: "Check Scarb latest:nightly"
+        uses: asdf-vm/actions/plugin-test@v2
+        with:
+          skip_install: true
+          version: latest:nightly
+          command: scarb --version | grep "${{ steps.version.outputs.LATEST_NIGHTLY_VERSION }}"
 
       - name: "Check Scarb nightly-2023-08-10"
         uses: asdf-vm/actions/plugin-test@v2
