@@ -35,6 +35,12 @@ list_all_versions() {
 	list_github_tags
 }
 
+get_latest_nightly() {
+	git ls-remote --tags --refs "$GH_NIGHTLIES_REPO" |
+		grep -o 'refs/tags/.*' | cut -d/ -f3- |
+		sort_versions | tail -n1 | xargs echo
+}
+
 download_release() {
 	local version filename url
 	version="$1"
