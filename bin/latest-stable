@@ -3,6 +3,7 @@
 set -euo pipefail
 
 current_script_path=${BASH_SOURCE[0]}
+printf ${BASH_SOURCE[0]}
 plugin_dir=$(dirname "$(dirname "$current_script_path")")
 
 # shellcheck source=lib/utils.bash
@@ -22,7 +23,6 @@ else
 	# when there are releases redirect_url="REPO/releases/tag/v<VERSION>"
 	redirect_url=$(curl "${curl_opts[@]}" "$GH_REPO/releases/latest" | sed -n -e "s|^location: *||p" | sed -n -e "s|\r||p")
 	version=
-	printf "redirect url: %s\n" "$redirect_url" >&2
 	if [[ "$redirect_url" == "$GH_REPO/releases" ]]; then
 		version="$(list_all_versions | sort_versions | tail -n1 | xargs echo)"
 	else
