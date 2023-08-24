@@ -4,6 +4,7 @@ set -euo pipefail
 
 GH_REPO="https://github.com/software-mansion/scarb"
 GH_NIGHTLIES_REPO="https://github.com/software-mansion/scarb-nightlies"
+VERSIONS_FILE_URL="https://raw.githubusercontent.com/software-mansion/asdf-scarb/szymmis/starknet-versions/versions.txt"
 TOOL_NAME="scarb"
 TOOL_TEST="scarb --version"
 
@@ -41,6 +42,21 @@ get_latest_nightly() {
 		sort_versions | tail -n1 | xargs echo
 }
 
+resolve_starknet_version(){
+  local alias="$1"
+  local versions_file compatibile_version
+
+  versions_file="$(curl -fsSL "$VERSIONS_FILE_URL")"
+  version_entry="$(echo "$versions_file" | grep "^$alias ")"
+
+  if [ "$version_entry" = "" ]; then
+    fail "No matching alias was found"
+  fi
+
+  compatibile_version="$(echo "$version_entry" | cut -d" " -f2)"
+  list_all_versions | grep "$compatibile_version" | tail -n 1
+}
+
 download_release() {
 	local version filename url
 	version="$1"
@@ -51,7 +67,10 @@ download_release() {
 
 	local repository tag
 
-	if grep -q "nightly" <<<"$version"; then
+	if echo "$version" | grep -q "starknet"; then
+		repository=$GH_REPO
+		tag="v$(resolve_starknet_version "$version")"
+	elif echo "$version" | grep -q "nightly"; then
 		repository=$GH_NIGHTLIES_REPO
 		tag=$version
 	else

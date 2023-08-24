@@ -7,6 +7,7 @@ plugin_dir=$(dirname "$(dirname "$current_script_path")")
 
 # shellcheck source=lib/utils.bash
 . "${plugin_dir}/lib/utils.bash"
+. "${ASDF_DIR}/lib/utils.bash"
 
 curl_opts=(-sI)
 
@@ -14,7 +15,15 @@ if [ -n "${GITHUB_API_TOKEN:-}" ]; then
 	curl_opts=("${curl_opts[@]}" -H "Authorization: token $GITHUB_API_TOKEN")
 fi
 
-if grep -q "nightly" <<<"$1"; then
+if echo "$1" | grep -q "starknet"; then
+  alias=$1
+  install_path=$(get_install_path scarb version "$alias")
+  resolved_version="$(resolve_starknet_version "$alias")"
+  if [ -d "$install_path" ] && [ ! "$resolved_version" = "$("$install_path"/bin/scarb --version | cut -d" " -f2)" ]; then
+    rm -rf "$install_path"
+  fi
+  version="$alias"
+elif grep -q "nightly" <<<"$1"; then
 	version="$(get_latest_nightly)"
 else
 	# curl of REPO/releases/latest is expected to be a 302 to another URL
