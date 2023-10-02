@@ -66,6 +66,6 @@ jobs:
   shfmt:
     runs-on: ubuntu-latest
     steps:
-      - uses: mfinelli/setup-shfmt@v2
+      - uses: mfinelli/setup-shfmt@v3
       - uses: actions/checkout@v3
       - run: shfmt --diff .
