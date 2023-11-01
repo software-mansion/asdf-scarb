@@ -32,26 +32,26 @@ jobs:
           echo "LATEST_NIGHTLY_VERSION=$latest_version" >> $env:GITHUB_OUTPUT
 
       - name: "Check Scarb latest"
-        uses: asdf-vm/actions/plugin-test@v2
+        uses: asdf-vm/actions/plugin-test@v3
         with:
           command: scarb --version | grep "scarb ${{ steps.version.outputs.LATEST_VERSION }}"
 
       - name: "Check Scarb v0.5.2"
-        uses: asdf-vm/actions/plugin-test@v2
+        uses: asdf-vm/actions/plugin-test@v3
         with:
           skip_install: true
           version: 0.5.2
           command: scarb --version | grep "scarb 0.5.2"
 
       - name: "Check Scarb latest:nightly"
-        uses: asdf-vm/actions/plugin-test@v2
+        uses: asdf-vm/actions/plugin-test@v3
         with:
           skip_install: true
           version: latest:nightly
           command: scarb --version | grep "${{ steps.version.outputs.LATEST_NIGHTLY_VERSION }}"
 
       - name: "Check Scarb nightly-2023-08-10"
-        uses: asdf-vm/actions/plugin-test@v2
+        uses: asdf-vm/actions/plugin-test@v3
         with:
           skip_install: true
           version: nightly-2023-08-10
