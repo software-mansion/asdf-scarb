@@ -22,7 +22,7 @@ asdf plugin add scarb https://github.com/software-mansion/asdf-scarb.git
 Show all installable versions:
 
 ```shell
-asdf list-all scarb
+asdf list all scarb
 ```
 
 Install latest version:
@@ -52,7 +52,7 @@ asdf install scarb nightly-2023-08-10
 Set a version globally (in your `~/.tool-versions` file):
 
 ```shell
-asdf global scarb latest
+asdf set --home scarb latest
 ```
 
 Now scarb commands are available:
