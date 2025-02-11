@@ -52,7 +52,7 @@ asdf install scarb nightly-2023-08-10
 Set a version globally (in your `~/.tool-versions` file):
 
 ```shell
-asdf set --home scarb latest
+asdf set -u scarb latest
 ```
 
 Now scarb commands are available:
