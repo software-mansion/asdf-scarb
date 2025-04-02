@@ -37,12 +37,6 @@ Install specific version:
 asdf install scarb 0.5.0
 ```
 
-Install latest nightly version:
-
-```shell
-asdf install scarb latest:nightly
-```
-
 Install specific nightly version:
 
 ```shell
