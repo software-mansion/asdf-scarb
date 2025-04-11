@@ -51,7 +51,7 @@ download_release() {
 
 	local repository tag
 
-	if grep -q "nightly" <<<"$version"; then
+	if grep -q -E "nightly|dev" <<<"$version"; then
 		repository=$GH_NIGHTLIES_REPO
 		tag=$version
 	else
